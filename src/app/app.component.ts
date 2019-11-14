@@ -1,6 +1,10 @@
 import { 
-  Component, OnInit
-} from '@angular/core';
+  Component, 
+  OnInit, 
+  ChangeDetectionStrategy,
+  HostBinding } from '@angular/core';
+
+import { SourceType, originSource } from './mock-data.js';
 
 @Component({
   selector: 'app-root',
@@ -8,9 +12,10 @@ import {
   styleUrls: ['./app.component.css']
   
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
 //Tab
-  tab22acticeID = 'tab1';
+  tab22acticeID = 'tab1'
+  tab1acticeID = 'tab1'
 
 // 手风琴
   restrictOneOpen = false;
@@ -53,5 +58,47 @@ export class AppComponent {
 
   ngOnInit() {
   }
+
+  basicDataSource: Array<SourceType> = JSON.parse(JSON.stringify(originSource.slice(0, 6)));
+  dataTableOptions = {
+    columns: [
+        {
+            field: 'firstName',
+            header: '用户名称',
+            fieldType: 'text'
+        },
+        {
+            field: 'lastName',
+            header: '昵称',
+            fieldType: 'text'
+        },
+        {
+            field: 'gender',
+            header: '项目角色',
+            fieldType: 'text'
+        },
+        {
+            field: 'dob',
+            header: 'Date of birth',
+            fieldType: 'date'
+        }
+    ]
+  };
+  
+  pager1 = {
+    total: 100,
+    pageIndex: 1,
+    pageSize: 10
+  };
+
+  setTotal(number) {
+    this.pager1.total = number;
+  }
+
+  setIndex(number: number) {
+    this.pager1.pageIndex = number;
+    console.log(this.pager1.pageIndex);
+  }
+
 }
 

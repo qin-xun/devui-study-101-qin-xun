@@ -5,10 +5,13 @@
     <d-tabs [(activeTab)]="tab22acticeID" [showContent]="false">
       <d-tab id="tab1" title="首页" tabId="tab1"> </d-tab>
     </d-tabs> 
+    <div class="welcome">
+      <span>Hi XXX</span>
+    </div>
   </div>
 
   <div class="mainPage">
-    <div class="left">
+    <div class="menuAccordion">
       <d-accordion
         [data]="menu"
         class="menu"
@@ -16,7 +19,101 @@
         (itemClick)="itemClick($event)"
         (menuToggle)="menuToggle($event)"
       ></d-accordion>
+    </div>  
+
+    <div class="content">
+      <section>
+        <d-tabs [type]="'tabs'" [(activeTab)]="tab1acticeID">
+          <d-tab id="tab1" title="项目成员" tabId="tab1">
+            <ng-template dTabContent></ng-template>
+          </d-tab>
+
+          <d-tab id="tab2" title="待审核" tabId="tab2">
+            <ng-template dTabContent>
+              <p>
+                Sit amet massa vitae tortor condimentum lacinia quis vel. Ac placerat
+                vestibulum lectus mauris. Et malesuada fames ac turpis egestas integer
+                eget aliquet nibh. Lectus magna fringilla urna porttitor rhoncus dolor
+                purus non. Porttitor rhoncus dolor purus non enim praesent. Felis
+                donec et odio pellentesque diam volutpat. Cras sed felis eget velit
+                aliquet sagittis id consectetur purus. Pulvinar sapien et ligula
+                ullamcorper malesuada proin. Quam lacus suspendisse faucibus interdum.
+                Eget duis at tellus at urna. Tellus mauris a diam maecenas sed.
+                Viverra accumsan in nisl nisi scelerisque eu ultrices vitae auctor.
+                Sed enim ut sem viverra aliquet eget sit amet. Orci nulla pellentesque
+                dignissim enim sit amet venenatis urna cursus. Adipiscing commodo elit
+                at imperdiet dui accumsan sit amet. Enim neque volutpat ac tincidunt
+                vitae. Mauris cursus mattis molestie a iaculis at.
+              </p>
+            </ng-template>
+          </d-tab>
+
+        </d-tabs>
+        
+      </section>
+
+      <div>
+        <div class="top-bar">
+          <d-search
+            [placeholder]="'请输入关键词，按enter键搜索'"
+            [size]="'sm'"
+            (searchFn)="onSearch($event)"
+          ></d-search>
+
+          <div class="right">
+            <div class="icon icon-add-member"></div><span>添加成员</span>
+            <div class="icon icon-qrcode"></div><span>通过链接邀请</span>
+            <div class="icon icon-help"></div><span>角色权限说明</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="chart">
+        <d-data-table
+        #datatable
+        [dataSource]="basicDataSource"
+        [scrollable]="true"
+        [type]="'striped'"
+      >
+        <d-column field="$index" header="#" [width]="'50px'"></d-column>
+        <d-column
+          *ngFor="let colOption of dataTableOptions.columns"
+          [field]="colOption.field"
+          [header]="colOption.header"
+          [fieldType]="colOption.fieldType"
+          [width]="'150px'"
+        ></d-column>
+        </d-data-table>
+          
+      </div>
+      
+        <div class="bottom-bar">
+          <div class="pagination">
+            <d-pagination
+              [total]="pager1.total"
+              [(pageSize)]="pager1.pageSize"
+              [totalItemText]="'总条数'"
+              [(pageIndex)]="pager1.pageIndex"
+              [canViewTotal]="true"
+              [canChangePageSize]="true"
+              [lite]="true"
+              [haveConfigMenu]="true"
+            >
+              <div class="pagination-config-item">
+                <div class="config-item-title">显示字段</div>
+                <div class="config-item-words">点击设置</div>
+              </div>
+              <div class="pagination-config-item">
+                <div class="config-item-title">显示方式</div>
+                <div style="padding-left:10px;margin-top:4px">
+                  <i class="icon-list-view"></i>
+                  <i class="icon-veIcon-briefcase"></i>
+                </div>
+              </div>
+            </d-pagination>
+          </div>
+        </div>
     </div>
-    <div class="right"></div>
   </div>
+
 </div>
